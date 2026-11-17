@@ -88,7 +88,7 @@ function Analytics() {
       <div className="py-8 max-md:py-6">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div><div className="mb-2 flex items-center gap-2 text-xs font-medium uppercase tracking-[0.14em] text-blue-300"><Activity size={14} /> Workspace insights</div><h1 className="text-3xl font-bold tracking-tight text-white max-sm:text-2xl">Your AI usage at a glance</h1><p className="mt-2 text-sm leading-6 text-gray-400">See how your workspace activity changes over time.</p></div>
-          <label className="flex items-center gap-2 rounded-xl border border-white/[0.08] bg-[#121520] px-3 py-2.5 text-xs text-gray-400"><Clock3 size={14} /><span className="sr-only">Date range</span><select value={period} onChange={(event) => setPeriod(event.target.value)} className="bg-transparent text-xs font-medium text-gray-200 outline-none">{Object.keys(periods).map((item) => <option key={item}>{item}</option>)}</select></label>
+          <label className="flex items-center gap-2 rounded-xl border border-white/[0.08] bg-[#121520] px-3 py-2.5 text-xs text-gray-400"><Clock3 size={14} /><span className="sr-only">Date range</span><select value={period} onChange={(event) => setPeriod(event.target.value)} style={{ colorScheme: 'dark' }} className="bg-transparent text-xs font-medium text-gray-100 outline-none">{Object.keys(periods).map((item) => <option key={item} value={item} style={{ backgroundColor: '#121520', color: '#f3f4f6' }}>{item}</option>)}</select></label>
         </div>
 
         <section className="grid gap-3 sm:grid-cols-2 2xl:grid-cols-4">
