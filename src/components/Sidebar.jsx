@@ -10,30 +10,34 @@ import {
   CircleHelp,
   Sparkles,
   ChevronDown,
+  FlaskConical,
 } from 'lucide-react'
+
+import { NavLink } from 'react-router-dom'
 
 const navigation = [
   {
     title: 'WORKSPACE',
     items: [
-      { name: 'Dashboard', icon: LayoutDashboard, active: true },
-      { name: 'AI Playground', icon: Bot },
-      { name: 'Code Review', icon: Code2 },
-      { name: 'Model Comparison', icon: GitCompareArrows },
+      { name: 'Dashboard', path: '/', icon: LayoutDashboard },
+      { name: 'AI Playground', path: '/playground', icon: Bot },
+      { name: 'Code Review', path: '/code-review', icon: Code2 },
+      { name: 'Model Comparison', path: '/models', icon: GitCompareArrows },
     ],
   },
   {
     title: 'MANAGEMENT',
     items: [
-      { name: 'My Projects', icon: FolderKanban },
-      { name: 'Analytics', icon: ChartNoAxesCombined },
+      { name: 'My Projects', path: '/projects', icon: FolderKanban },
+      { name: 'Analytics', path: '/analytics', icon: ChartNoAxesCombined },
+      { name: 'Test Generation', path: '/test-generation', icon: FlaskConical },
     ],
   },
 ]
 
-function Sidebar() {
+function Sidebar({ onNavigate }) {
   return (
-    <aside className="flex h-full w-62.5 shrink-0 flex-col border-r border-white/[0.07] bg-[#10121b] px-4 py-5">
+    <aside className="flex h-full w-62.5 shrink-0 flex-col overflow-y-auto border-r border-white/[0.07] bg-[#10121b] px-4 py-5">
 
       {/* Brand */}
       <div className="mb-10 flex items-center gap-3 px-2">
@@ -49,7 +53,6 @@ function Sidebar() {
             DEVELOPER PLATFORM
           </p>
         </div>
-
       </div>
 
       {/* Workspace selector */}
@@ -81,22 +84,28 @@ function Sidebar() {
                 const Icon = item.icon
 
                 return (
-                  <button
+                  <NavLink
                     key={item.name}
-                    className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] transition-all ${
-                      item.active
-                        ? 'border border-violet-500/20 bg-violet-500/10 font-medium text-violet-300'
-                        : 'text-gray-400 hover:bg-white/[0.05] hover:text-white'
-                    }`}
+                    to={item.path}
+                    end={item.path === '/'}
+                    onClick={onNavigate}
+                    className={({ isActive }) =>
+                      `flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] transition-all ${
+                        isActive
+                          ? 'border border-violet-500/20 bg-violet-500/10 font-medium text-violet-300'
+                          : 'text-gray-400 hover:bg-white/[0.05] hover:text-white'
+                      }`
+                    }
                   >
                     <Icon size={17} />
                     {item.name}
+
                     {item.name === 'AI Playground' && (
                       <span className="ml-auto rounded bg-violet-500/15 px-1.5 py-0.5 text-[9px] text-violet-300">
                         NEW
                       </span>
                     )}
-                  </button>
+                  </NavLink>
                 )
               })}
             </div>
@@ -106,15 +115,26 @@ function Sidebar() {
 
       {/* Bottom links */}
       <div className="space-y-1 border-t border-white/[0.07] pt-4">
+
         <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-gray-400 hover:bg-white/[0.05] hover:text-white">
           <CircleHelp size={17} />
           Help & Support
         </button>
 
-        <button className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-gray-400 hover:bg-white/[0.05] hover:text-white">
+        <NavLink
+          to="/settings"
+          onClick={onNavigate}
+          className={({ isActive }) =>
+            `flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition ${
+              isActive
+                ? 'bg-violet-500/10 text-violet-300'
+                : 'text-gray-400 hover:bg-white/[0.05] hover:text-white'
+            }`
+          }
+        >
           <Settings size={17} />
           Settings
-        </button>
+        </NavLink>
 
         <div className="mt-4 flex items-center gap-3 rounded-xl bg-white/[0.04] p-3">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 text-sm font-bold text-white">

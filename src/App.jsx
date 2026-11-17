@@ -1,13 +1,43 @@
 
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { Routes, Route, Navigate } from 'react-router-dom'
+
 import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
+
+// Temporary pages until we build their actual interfaces
+function Playground() {
+  return <h1 className="text-2xl font-bold text-white">AI Playground</h1>
+}
+
+function CodeReview() {
+  return <h1 className="text-2xl font-bold text-white">Code Review</h1>
+}
+
+function ModelComparison() {
+  return <h1 className="text-2xl font-bold text-white">Model Comparison</h1>
+}
+
+function Projects() {
+  return <h1 className="text-2xl font-bold text-white">My Projects</h1>
+}
+
+function Analytics() {
+  return <h1 className="text-2xl font-bold text-white">Analytics</h1>
+}
+
+function SettingsPage() {
+  return <h1 className="text-2xl font-bold text-white">Settings</h1>
+}
+
+function TestGeneration() {
+  return <h1 className="text-2xl font-bold text-white">Test Generation</h1>
+}
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
-  // Prevent background scrolling while mobile navigation is open
   useEffect(() => {
     document.body.style.overflow = isSidebarOpen ? 'hidden' : ''
 
@@ -17,17 +47,16 @@ function App() {
   }, [isSidebarOpen])
 
   return (
-    <div className="flex min-h-screen bg-[#0b0d14]">
+    <div className="flex h-screen overflow-hidden bg-[#0b0d14]">
 
       {/* Desktop Sidebar */}
-      <div className="hidden md:flex">
-        <Sidebar />
+      <div className="hidden h-full shrink-0 md:flex">
+        <Sidebar onNavigate={() => setIsSidebarOpen(false)} />
       </div>
 
       {/* Mobile Navigation */}
       <div className="md:hidden">
 
-        {/* Hamburger Button */}
         <button
           onClick={() => setIsSidebarOpen(true)}
           aria-label="Open navigation"
@@ -38,17 +67,14 @@ function App() {
 
         {isSidebarOpen && (
           <>
-            {/* Dark Background Overlay */}
             <div
               onClick={() => setIsSidebarOpen(false)}
               className="fixed inset-0 z-40 bg-black/70 backdrop-blur-sm"
             />
 
-            {/* Navigation Drawer */}
             <div className="fixed inset-y-0 left-0 z-50 w-70 overflow-y-auto overscroll-contain bg-[#10121b] shadow-2xl">
-              <Sidebar />
+              <Sidebar onNavigate={() => setIsSidebarOpen(false)} />
 
-              {/* Close Button */}
               <button
                 onClick={() => setIsSidebarOpen(false)}
                 aria-label="Close navigation"
@@ -61,8 +87,22 @@ function App() {
         )}
       </div>
 
-      {/* Dashboard */}
-      <Dashboard />
+      {/* Application Pages */}
+      <main className="min-w-0 flex-1 overflow-y-auto px-6 py-6 md:px-8">
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/playground" element={<Playground />} />
+          <Route path="/code-review" element={<CodeReview />} />
+          <Route path="/models" element={<ModelComparison />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/analytics" element={<Analytics />} />
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/test-generation" element={<TestGeneration />} />
+
+          {/* Redirect unknown URLs */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
 
     </div>
   )

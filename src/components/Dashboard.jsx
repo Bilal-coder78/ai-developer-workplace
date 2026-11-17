@@ -155,7 +155,7 @@ function Dashboard() {
             </div>
 
             <h1 className="text-3xl font-bold tracking-tight text-white max-sm:text-2xl">
-              Welcome back, Developer <span>👋</span>
+              Welcome back, Developers
             </h1>
 
             <p className="mt-2 text-sm text-gray-400">
