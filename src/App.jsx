@@ -5,12 +5,9 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 
 import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
+import Playground from './components/Playground'
 
 // Temporary pages until we build their actual interfaces
-function Playground() {
-  return <h1 className="text-2xl font-bold text-white">AI Playground</h1>
-}
-
 function CodeReview() {
   return <h1 className="text-2xl font-bold text-white">Code Review</h1>
 }
