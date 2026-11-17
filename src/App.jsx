@@ -8,10 +8,7 @@ import Dashboard from './components/Dashboard'
 import Playground from './components/Playground'
 import CodeReview from './components/CodeReview'
 import ModelComparison from './components/ModelComparison'
-
-function Projects() {
-  return <h1 className="text-2xl font-bold text-white">My Projects</h1>
-}
+import Projects from './components/Projects'
 
 function Analytics() {
   return <h1 className="text-2xl font-bold text-white">Analytics</h1>
