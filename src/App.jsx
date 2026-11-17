@@ -7,10 +7,7 @@ import Sidebar from './components/Sidebar'
 import Dashboard from './components/Dashboard'
 import Playground from './components/Playground'
 import CodeReview from './components/CodeReview'
-
-function ModelComparison() {
-  return <h1 className="text-2xl font-bold text-white">Model Comparison</h1>
-}
+import ModelComparison from './components/ModelComparison'
 
 function Projects() {
   return <h1 className="text-2xl font-bold text-white">My Projects</h1>
